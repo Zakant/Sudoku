@@ -14,7 +14,7 @@ namespace Sudoku.Test
             Assert.AreEqual(0, IndexHelper.ToIndex((0, 0)));
             Assert.AreEqual(5, IndexHelper.ToIndex((5, 0)));
             Assert.AreEqual(9, IndexHelper.ToIndex((0, 1)));
-            Assert.AreEqual(18 + 6, IndexHelper.ToIndex((6, 3)));
+            Assert.AreEqual(27 + 6, IndexHelper.ToIndex((6, 3)));
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Sudoku.Test
             Assert.AreEqual((0, 0), IndexHelper.ToSubscript(0));
             Assert.AreEqual((5, 0), IndexHelper.ToSubscript(5));
             Assert.AreEqual((0, 1), IndexHelper.ToSubscript(9));
-            Assert.AreEqual((6, 3), IndexHelper.ToSubscript(18 + 6));
+            Assert.AreEqual((6, 3), IndexHelper.ToSubscript(27 + 6));
         }
 
         [TestMethod]
