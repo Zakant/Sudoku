@@ -44,58 +44,18 @@ namespace Sudoku.Test
         [TestMethod]
         public void TestExceptionToIndex()
         {
-            try
-            {
-                IndexHelper.ToIndex((-1, 2));
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
-
-            try
-            {
-                IndexHelper.ToIndex((1, -2));
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
-
-            try
-            {
-                IndexHelper.ToIndex((-1, -2));
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
-
-            try
-            {
-                IndexHelper.ToIndex((1, 9));
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
-
-            try
-            {
-                IndexHelper.ToIndex((9, 0));
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((-1, 2)));
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((1, -2)));
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((-1, -2)));
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((1, 9)));
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((9, 0)));
         }
 
         [TestMethod]
         public void TestExceptionToSubscript()
         {
-            try
-            {
-                IndexHelper.ToSubscript(-2);
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
-
-            try
-            {
-                IndexHelper.ToSubscript(81);
-                Assert.Fail();
-            }
-            catch (Exception ex) { }
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToSubscript(-2));
+            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToSubscript(81));
         }
     }
 }
