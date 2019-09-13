@@ -63,7 +63,20 @@ namespace Sudoku.Test
                 IndexHelper.ToIndex((-1, -2));
                 Assert.Fail();
             }
+            catch (Exception ex) { }
 
+            try
+            {
+                IndexHelper.ToIndex((1, 9));
+                Assert.Fail();
+            }
+            catch (Exception ex) { }
+
+            try
+            {
+                IndexHelper.ToIndex((9, 0));
+                Assert.Fail();
+            }
             catch (Exception ex) { }
         }
 
@@ -73,6 +86,13 @@ namespace Sudoku.Test
             try
             {
                 IndexHelper.ToSubscript(-2);
+                Assert.Fail();
+            }
+            catch (Exception ex) { }
+
+            try
+            {
+                IndexHelper.ToSubscript(81);
                 Assert.Fail();
             }
             catch (Exception ex) { }
