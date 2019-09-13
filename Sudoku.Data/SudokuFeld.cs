@@ -37,6 +37,24 @@ namespace Sudoku.Data
         }
 
         /// <summary>
+        /// Bestimmt die <see cref="SudokuZelle"/> an der durch <paramref name="position"/> angegebene Position.
+        /// </summary>
+        /// <param name="position">Die Position der Zelle.</param>
+        /// <returns>Die <see cref="SudokuZelle"/> an der angegebenen Position.</returns>
+        public SudokuZelle HoleZelle((int, int) position) => HoleZelle(position.Item1, position.Item2);
+
+        /// <summary>
+        /// Bestimmt die <see cref="SudokuZelle"/> an der durch <paramref name="spaltePosition"/> und <paramref name="zeilePosition"/> angegebenen Position.
+        /// </summary>
+        /// <param name="spaltePosition">Die Spalten Position der Zelle.</param>
+        /// <param name="zeilePosition">Die Zeilen Position der Zelle.</param>
+        /// <returns>Die <see cref="SudokuZelle"/> an der angegebenen Position.</returns>
+        public SudokuZelle HoleZelle(int spaltePosition, int zeilePosition)
+        {
+            return _zellen[IndexHelper.ToIndex((spaltePosition, zeilePosition))];
+        }
+
+        /// <summary>
         /// Bestimmt alle <see cref="SudokuZelle" /> die zu der Spalte mit dem Index <paramref name="index"/> gehören.
         /// </summary>
         /// <param name="index">Der Index der Spalte.</param>
