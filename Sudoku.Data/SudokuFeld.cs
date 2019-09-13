@@ -62,7 +62,7 @@ namespace Sudoku.Data
         /// <returns>Eine Aufzählung aller <see cref="SudokuZelle" /> die zu der Spalte gehören.</returns>
         public IEnumerable<SudokuZelle> HoleSpalte(int index)
         {
-            throw new NotImplementedException();
+            return Enumerable.Range(0, 8).Select(x => HoleZelle(index, x));
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Sudoku.Data
         /// <returns>Eine Aufzählung aller <see cref="SudokuZelle" /> die zu der Zeile gehören.</returns>
         public IEnumerable<SudokuZelle> HoleZeile(int index)
         {
-            throw new NotImplementedException();
+            return Enumerable.Range(0, 8).Select(x => HoleZelle(x, index));
         }
 
         /// <summary>
