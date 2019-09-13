@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sudoku.Data
 {
     /// <summary>
-    /// Stellt ein Sudoku Feld mit 9x9 Zellen da.
+    /// Stellt ein Sudoku Feld mit 9x9 <see cref="SudokuZelle"/> dar.
     /// </summary>
     public class SudokuFeld
     {
@@ -17,6 +16,25 @@ namespace Sudoku.Data
         /// Sammlung aller Zellen dieses Sudoku Feldes in der Row-Major Darstellung.
         /// </summary>
         private SudokuZelle[] _zellen = new SudokuZelle[81];
+
+        /// <summary>
+        /// Erzeugt ein neues leeres Sudokufeld.
+        /// </summary>
+        public SudokuFeld()
+        {
+            for (int i = 0; i < 81; i++)
+                _zellen[i] = new SudokuZelle(IndexHelper.ToSubscript(i));
+        }
+
+        /// <summary>
+        /// Erzeugt ein neues Sudokufeld, dass dem übergebenen in <paramref name="source"/> entspricht.
+        /// </summary>
+        /// <param name="source">Das zu kopierende Feld.</param>
+        public SudokuFeld(SudokuFeld source)
+        {
+            for (int i = 0; i < 81; i++)
+                _zellen[i] = source._zellen[i].Clone();
+        }
 
         /// <summary>
         /// Bestimmt alle <see cref="SudokuZelle" /> die zu der Spalte mit dem Index <paramref name="index"/> gehören.
@@ -63,17 +81,23 @@ namespace Sudoku.Data
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> Blockweise aus. Die äußere Aufzählung sind die Blöcke, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
-        /// <returns>Blockweisedarstellung des <see cref="SudokuFeld"/></returns>
+        /// <returns>Blockweisedarstellung des <see cref="SudokuFeld"/>.</returns>
         public IEnumerable<IEnumerable<SudokuZelle>> HoleBlockweise() => Enumerable.Range(0, 8).Select(x => HoleBlock(x));
 
         /// <summary>
-        /// Überprüft, ob das Sudoku Feld den Regeln entspricht.
+        /// Überprüft, ob das Sudokufeld den Regeln entspricht.
         /// </summary>
         /// <returns>true, wenn das Sudoku valide ist, andernfalls false.</returns>
         public bool IstValide()
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Erzeugt eine Kopie des Sudokufeldes. Die erzeugt Kopie ist tief. 
+        /// </summary>
+        /// <returns></returns>
+        public SudokuFeld Clone() => new SudokuFeld(this);
 
         public override string ToString()
         {
@@ -86,6 +110,27 @@ namespace Sudoku.Data
                     sb.AppendLine("------+-------+------");
             }
             return sb.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SudokuFeld feld &&
+                Enumerable.SequenceEqual(_zellen, feld._zellen);
+        }
+
+        public override int GetHashCode()
+        {
+            return -1285944036 + EqualityComparer<SudokuZelle[]>.Default.GetHashCode(_zellen);
+        }
+
+        public static bool operator ==(SudokuFeld left, SudokuFeld right)
+        {
+            return EqualityComparer<SudokuFeld>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(SudokuFeld left, SudokuFeld right)
+        {
+            return !(left == right);
         }
     }
 }
