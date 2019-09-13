@@ -17,6 +17,10 @@ namespace Sudoku.Data
         /// </summary>
         private SudokuZelle[] _zellen = new SudokuZelle[81];
 
+        public SudokuZelle this[int spaltePosition, int zeilePosition] => HoleZelle(spaltePosition, zeilePosition);
+
+        public SudokuZelle this[(int, int) position] => HoleZelle(position);
+
         /// <summary>
         /// Erzeugt ein neues leeres Sudokufeld.
         /// </summary>
@@ -49,10 +53,7 @@ namespace Sudoku.Data
         /// <param name="spaltePosition">Die Spalten Position der Zelle.</param>
         /// <param name="zeilePosition">Die Zeilen Position der Zelle.</param>
         /// <returns>Die <see cref="SudokuZelle"/> an der angegebenen Position.</returns>
-        public SudokuZelle HoleZelle(int spaltePosition, int zeilePosition)
-        {
-            return _zellen[IndexHelper.ToIndex((spaltePosition, zeilePosition))];
-        }
+        public SudokuZelle HoleZelle(int spaltePosition, int zeilePosition) => _zellen[IndexHelper.ToIndex((spaltePosition, zeilePosition))];
 
         /// <summary>
         /// Bestimmt alle <see cref="SudokuZelle" /> die zu der Spalte mit dem Index <paramref name="index"/> gehören.
