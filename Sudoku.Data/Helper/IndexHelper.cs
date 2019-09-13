@@ -15,7 +15,9 @@ namespace Sudoku.Data.Helper
         /// <returns>Der fortlaufende Index.</returns>
         public static int ToIndex(this (int, int) value)
         {
-            throw new NotImplementedException();
+            if (value.Item1 < 0 || value.Item1 > 8 || value.Item2 < 0 || value.Item2 > 8)
+                throw new ArgumentException("Argument out of bound!");
+            return value.Item1 + value.Item2 * 9;
         }
 
         /// <summary>
@@ -25,7 +27,11 @@ namespace Sudoku.Data.Helper
         /// <returns>Die Zeilen- und Spaltenangabe. Der erste Eintrag stellt die Spalte, der zweite die Zeile dar.</returns>
         public static (int, int) ToSubscript(this int value)
         {
-            throw new NotImplementedException();
+            if (value < 0 || value > 80)
+                throw new ArgumentException("Argument out of bound!");
+            int zeile = value / 9;
+            int spalte = value - 9 * zeile;
+            return (spalte, zeile);
         }
     }
 }
