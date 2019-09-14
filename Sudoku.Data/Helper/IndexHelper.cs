@@ -33,5 +33,21 @@ namespace Sudoku.Data.Helper
             int spalte = value - 9 * zeile;
             return (spalte, zeile);
         }
+
+        /// <summary>
+        /// Übersetzt einen Blockindex in die Indices der enthaltenen Zellen.
+        /// </summary>
+        /// <param name="blockIndex">Der zu verwendende Blockindex.</param>
+        /// <returns>Auflistung aller Indices der enthaltenen Zellen.</returns>
+        public static IEnumerable<(int, int)> SubscriptsFromBlockIndex(this int blockIndex)
+        {
+            if (blockIndex < 0 || blockIndex > 8)
+                throw new ArgumentOutOfRangeException();
+            int blockZeile = blockIndex / 3;
+            int blockSpalte = blockIndex - 3 * blockZeile;
+
+            return Enumerable.Range(blockZeile * 3, 3)
+                .SelectMany(zeilenIndex => Enumerable.Range(blockSpalte * 3, 3).Select(spaltenIndex => (spaltenIndex, zeilenIndex)));
+        }
     }
 }

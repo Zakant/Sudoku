@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sudoku.Data.Helper;
 
@@ -39,6 +40,24 @@ namespace Sudoku.Test
         {
             for (int i = 0; i < 81; i++)
                 Assert.AreEqual(i, IndexHelper.ToIndex(IndexHelper.ToSubscript(i)));
+        }
+
+        [TestMethod]
+        public void TestSubscriptsFromBlockIndex()
+        {
+            (int, int)[] expected0 = new (int, int)[] { (0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2) };
+            (int, int)[] expected4 = new (int, int)[] { (3, 3), (4, 3), (5, 3), (3, 4), (4, 4), (5, 4), (3, 5), (4, 5), (5, 5) };
+            (int, int)[] expected7 = new (int, int)[] { (3, 6), (4, 6), (5, 6), (3, 7), (4, 7), (5, 7), (3, 8), (4, 8), (5, 8) };
+
+            Assert.IsTrue(Enumerable.SequenceEqual(expected0, IndexHelper.SubscriptsFromBlockIndex(0)));
+            Assert.IsTrue(Enumerable.SequenceEqual(expected4, IndexHelper.SubscriptsFromBlockIndex(4)));
+            Assert.IsTrue(Enumerable.SequenceEqual(expected7, IndexHelper.SubscriptsFromBlockIndex(7)));
+        }
+
+        public void TestExceptionSubscriptsFromBlockIndex()
+        {
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.SubscriptsFromBlockIndex(-2));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.SubscriptsFromBlockIndex(9));
         }
 
         [TestMethod]
