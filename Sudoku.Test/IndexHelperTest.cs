@@ -63,18 +63,18 @@ namespace Sudoku.Test
         [TestMethod]
         public void TestExceptionToIndex()
         {
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((-1, 2)));
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((1, -2)));
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((-1, -2)));
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((1, 9)));
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToIndex((9, 0)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToIndex((-1, 2)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToIndex((1, -2)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToIndex((-1, -2)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToIndex((1, 9)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToIndex((9, 0)));
         }
 
         [TestMethod]
         public void TestExceptionToSubscript()
         {
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToSubscript(-2));
-            Assert.ThrowsException<ArgumentException>(() => IndexHelper.ToSubscript(81));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToSubscript(-2));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => IndexHelper.ToSubscript(81));
         }
     }
 }

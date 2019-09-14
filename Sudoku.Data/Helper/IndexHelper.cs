@@ -16,7 +16,7 @@ namespace Sudoku.Data.Helper
         public static int ToIndex(this (int, int) value)
         {
             if (value.Item1 < 0 || value.Item1 > 8 || value.Item2 < 0 || value.Item2 > 8)
-                throw new ArgumentException("Argument out of bound!");
+                throw new ArgumentOutOfRangeException();
             return value.Item1 + value.Item2 * 9;
         }
 
@@ -28,7 +28,7 @@ namespace Sudoku.Data.Helper
         public static (int, int) ToSubscript(this int value)
         {
             if (value < 0 || value > 80)
-                throw new ArgumentException("Argument out of bound!");
+                throw new ArgumentOutOfRangeException();
             int zeile = value / 9;
             int spalte = value - 9 * zeile;
             return (spalte, zeile);
