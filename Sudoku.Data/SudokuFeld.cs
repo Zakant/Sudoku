@@ -129,6 +129,12 @@ namespace Sudoku.Data
         public IEnumerable<IEnumerable<SudokuZelle>> HoleAlle() => HoleZeilenweise().Concat(HoleSpaltenweise()).Concat(HoleBlockweise());
 
         /// <summary>
+        /// Gibt alle <see cref="SudokuZelle"/> des Feldes zurück. 
+        /// </summary>
+        /// <returns>Alle Zellen des Feldes.</returns>
+        public IEnumerable<SudokuZelle> HolleAlleZellen() => Enumerable.Range(0, 81).Select(x => _zellen[x]);
+
+        /// <summary>
         /// Überprüft, ob das Sudokufeld den Regeln entspricht.
         /// </summary>
         /// <returns>true, wenn das Sudoku valide ist, andernfalls false.</returns>
