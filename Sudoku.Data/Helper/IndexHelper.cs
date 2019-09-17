@@ -11,7 +11,7 @@ namespace Sudoku.Data.Helper
         /// <summary>
         /// Übersetzt einen Zeilen- und Spaltenangabe in einen fortlaufenden Index.
         /// </summary>
-        /// <param name="value">Die Zeilen- und Spaltenangabe. Der erste Eintrag stellt die Spalte, der zweite die Zeile dar.</param>
+        /// <param name="value">Die Spalten- und Zeilenangabe. Der erste Eintrag stellt die Spalte, der zweite die Zeile dar.</param>
         /// <returns>Der fortlaufende Index.</returns>
         public static int ToIndex(this (int, int) value)
         {
@@ -48,6 +48,19 @@ namespace Sudoku.Data.Helper
 
             return Enumerable.Range(blockZeile * 3, 3)
                 .SelectMany(zeilenIndex => Enumerable.Range(blockSpalte * 3, 3).Select(spaltenIndex => (spaltenIndex, zeilenIndex)));
+        }
+
+        /// <summary>
+        /// Übersetzt eine Spalten- und Zeilenposition in einen Blockindex.
+        /// </summary>
+        /// <param name="value">Die Spalten und Zeilenangabe. Der erste Eintrag stellt die Spalte, der zweite die Zeile dar.</param>
+        /// <returns>Der Index des Blockes.</returns>
+        public static int BlockIndexFromSubscript(this (int, int) value)
+        {
+            int blockSpalte = value.Item1 % 3;
+            int blockZeile = value.Item2 % 3;
+
+            return blockSpalte + blockZeile * 3;
         }
     }
 }
