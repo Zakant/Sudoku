@@ -120,8 +120,20 @@ namespace Sudoku.Data
         /// <returns>true, wenn das Sudoku valide ist, andernfalls false.</returns>
         public bool IstValide()
         {
-            throw new NotImplementedException();
+            var allEntries = HoleZeilenweise().Concat(HoleSpaltenweise()).Concat(HoleBlockweise());
+            return allEntries.Select(x => CheckZellen(x)).All(x => x);
+
+            static bool CheckZellen(IEnumerable<SudokuZelle> zellen)
+            {
+                return !zellen.GroupBy(x => x.Wert).Where(x => x.Count() > 1 && x.Key != SudokuWert.Leer).Any();
+            }
         }
+
+        /// <summary>
+        /// Überprüft, ob das Sudokufeld vollständig ist.
+        /// </summary>
+        /// <returns>true, falls das Feld vollästndig ist, anderfalls false.</returns>
+        public bool IstVollständig() => _zellen.All(x => x.Wert != SudokuWert.Leer);
 
         /// <summary>
         /// Erzeugt eine Kopie des Sudokufeldes. Die erzeugt Kopie ist tief. 
