@@ -33,6 +33,13 @@ namespace Sudoku.Data
         public SudokuZelle this[(int, int) position] => HoleZelle(position);
 
         /// <summary>
+        /// Bestimmt die <see cref="SudokuZelle"/> an dem durch <paramref name="index"/> angegebenen Index.
+        /// </summary>
+        /// <param name="index">Der Index der Zelle.</param>
+        /// <returns>Die <see cref="SudokuZelle"/> an dem angegebenen Index.</returns>
+        public SudokuZelle this[int index] => _zellen[index];
+
+        /// <summary>
         /// Erzeugt ein neues leeres Sudokufeld.
         /// </summary>
         public SudokuFeld()
@@ -115,13 +122,19 @@ namespace Sudoku.Data
         public IEnumerable<IEnumerable<SudokuZelle>> HoleBlockweise() => Enumerable.Range(0, 8).Select(x => HoleBlock(x));
 
         /// <summary>
+        /// Gibt das gesamte <see cref="SudokuFeld"/> aus. Zunächst erfolgt die Ausgabe der Spalten (<see cref="HoleSpaltenweise"/>), dann die Ausgabe der Zeilen (<see cref="HoleSpaltenweise"/>) 
+        /// und abschließend die Ausgabe der Blöcke (<see cref="HoleBlockweise"/>). Auf diese Weise wird des Feld effektiv drei mal ausgegeben!
+        /// </summary>
+        /// <returns>Die Sammlung aller Zeilen, Spalten und Blöcke.</returns>
+        public IEnumerable<IEnumerable<SudokuZelle>> HoleAlle() => HoleZeilenweise().Concat(HoleSpaltenweise()).Concat(HoleBlockweise());
+
+        /// <summary>
         /// Überprüft, ob das Sudokufeld den Regeln entspricht.
         /// </summary>
         /// <returns>true, wenn das Sudoku valide ist, andernfalls false.</returns>
         public bool IstValide()
         {
-            var allEntries = HoleZeilenweise().Concat(HoleSpaltenweise()).Concat(HoleBlockweise());
-            return allEntries.Select(x => CheckZellen(x)).All(x => x);
+            return HoleAlle().Select(x => CheckZellen(x)).All(x => x);
 
             static bool CheckZellen(IEnumerable<SudokuZelle> zellen)
             {
