@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sudoku.Data.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,11 @@ namespace Sudoku.Data
         /// Index der Spalte, in der sich die Zelle befindet.
         /// </summary>
         public int SpaltenPosition { get; protected set; }
+
+        /// <summary>
+        /// Index der Zelle im Datenspeicher des <see cref="SudokuFeld"/>.
+        /// </summary>
+        public int Index { get; protected set; }
 
         /// <summary>
         /// Erzeugt eine neue Sudokuzelle mit dem Werte <see cref="SudokuWert.Leer"/>.
@@ -55,11 +61,12 @@ namespace Sudoku.Data
         /// <param name="wert">Der Wert der Zelle.</param>
         /// <param name="spaltenPosition">Der Index der Spalte, in der sich die Zelle befindet.</param>
         /// <param name="zeilenPositon">Der Index der Zeile, in der sich die Zelle befindet.</param>
-        public SudokuZelle(SudokuWert wert, int spaltenPosition, int zeilenPositon)
+        public SudokuZelle(SudokuWert wert, int spaltenPosition, int zeilenPosition)
         {
             Wert = wert;
-            ZeilenPosition = ZeilenPosition;
+            ZeilenPosition = zeilenPosition;
             SpaltenPosition = spaltenPosition;
+            Index = IndexHelper.ToIndex((spaltenPosition, zeilenPosition));
         }
 
         /// <summary>
