@@ -15,10 +15,21 @@ namespace Sudoku.Data
         /// <summary>
         /// Sammlung aller Zellen dieses Sudoku Feldes in der Row-Major Darstellung.
         /// </summary>
-        private SudokuZelle[] _zellen = new SudokuZelle[81];
+        private readonly SudokuZelle[] _zellen = new SudokuZelle[81];
 
+        /// <summary>
+        /// Bestimmt die <see cref="SudokuZelle"/> an der durch <paramref name="spaltePosition"/> und <paramref name="zeilePosition"/> angegebenen Position.
+        /// </summary>
+        /// <param name="spaltePosition">Die Spalten Position der Zelle.</param>
+        /// <param name="zeilePosition">Die Zeilen Position der Zelle.</param>
+        /// <returns>Die <see cref="SudokuZelle"/> an der angegebenen Position.</returns>
         public SudokuZelle this[int spaltePosition, int zeilePosition] => HoleZelle(spaltePosition, zeilePosition);
 
+        /// <summary>
+        /// Bestimmt die <see cref="SudokuZelle"/> an der durch <paramref name="position"/> angegebene Position.
+        /// </summary>
+        /// <param name="position">Die Position der Zelle.</param>
+        /// <returns>Die <see cref="SudokuZelle"/> an der angegebenen Position.</returns>
         public SudokuZelle this[(int, int) position] => HoleZelle(position);
 
         /// <summary>
@@ -82,19 +93,19 @@ namespace Sudoku.Data
         /// <returns>Eine Aufzählung aller <see cref="SudokuZelle" /> die zu dem Block gehören.</returns>
         public IEnumerable<SudokuZelle> HoleBlock(int index)
         {
-            throw new NotImplementedException();
+            return IndexHelper.SubscriptsFromBlockIndex(index).Select(x => HoleZelle(x));
         }
 
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> Zeilweise aus. Die äußere Aufzählung sind die Zeilen, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
-        /// <returns>Zeilweisedarstellung des <see cref="SudokuFeld"/></returns>
+        /// <returns>Zeilweisedarstellung des <see cref="SudokuFeld"/>.</returns>
         public IEnumerable<IEnumerable<SudokuZelle>> HoleZeilenweise() => Enumerable.Range(0, 8).Select(x => HoleZeile(x));
 
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> Spaltenweise aus. Die äußere Aufzählung sind die Spalten, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
-        /// <returns>Spaltenweisedarstellung des <see cref="SudokuFeld"/></returns>
+        /// <returns>Spaltenweisedarstellung des <see cref="SudokuFeld"/>.</returns>
         public IEnumerable<IEnumerable<SudokuZelle>> HoleSpaltenweise() => Enumerable.Range(0, 8).Select(x => HoleSpalte(x));
 
         /// <summary>
