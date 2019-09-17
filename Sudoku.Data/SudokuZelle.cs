@@ -75,23 +75,7 @@ namespace Sudoku.Data
         /// <returns>Die erzeugte Kopie.</returns>
         public SudokuZelle Clone() => new SudokuZelle(Wert, SpaltenPosition, ZeilenPosition);
 
-        public override string ToString()
-        {
-            switch (Wert)
-            {
-                case SudokuWert.Leer: return " ";
-                case SudokuWert.Eins: return "1";
-                case SudokuWert.Zwei: return "2";
-                case SudokuWert.Drei: return "3";
-                case SudokuWert.Vier: return "4";
-                case SudokuWert.Fünf: return "5";
-                case SudokuWert.Sechs: return "6";
-                case SudokuWert.Sieben: return "7";
-                case SudokuWert.Acht: return "8";
-                case SudokuWert.Neun: return "9";
-                default: throw new Exception("Invalid value");
-            }
-        }
+        public override string ToString() => Wert.ToChar().ToString();
 
         public override bool Equals(object obj)
         {
