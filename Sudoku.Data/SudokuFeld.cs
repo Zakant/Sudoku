@@ -80,7 +80,7 @@ namespace Sudoku.Data
         /// <returns>Eine Aufzählung aller <see cref="SudokuZelle" /> die zu der Spalte gehören.</returns>
         public IEnumerable<SudokuZelle> HoleSpalte(int index)
         {
-            return Enumerable.Range(0, 8).Select(x => HoleZelle(index, x));
+            return Enumerable.Range(0, 9).Select(x => HoleZelle(index, x));
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Sudoku.Data
         /// <returns>Eine Aufzählung aller <see cref="SudokuZelle" /> die zu der Zeile gehören.</returns>
         public IEnumerable<SudokuZelle> HoleZeile(int index)
         {
-            return Enumerable.Range(0, 8).Select(x => HoleZelle(x, index));
+            return Enumerable.Range(0, 9).Select(x => HoleZelle(x, index));
         }
 
         /// <summary>
@@ -107,19 +107,19 @@ namespace Sudoku.Data
         /// Gibt das gesamte <see cref="SudokuFeld"/> Zeilweise aus. Die äußere Aufzählung sind die Zeilen, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
         /// <returns>Zeilweisedarstellung des <see cref="SudokuFeld"/>.</returns>
-        public IEnumerable<IEnumerable<SudokuZelle>> HoleZeilenweise() => Enumerable.Range(0, 8).Select(x => HoleZeile(x));
+        public IEnumerable<IEnumerable<SudokuZelle>> HoleZeilenweise() => Enumerable.Range(0, 9).Select(x => HoleZeile(x));
 
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> Spaltenweise aus. Die äußere Aufzählung sind die Spalten, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
         /// <returns>Spaltenweisedarstellung des <see cref="SudokuFeld"/>.</returns>
-        public IEnumerable<IEnumerable<SudokuZelle>> HoleSpaltenweise() => Enumerable.Range(0, 8).Select(x => HoleSpalte(x));
+        public IEnumerable<IEnumerable<SudokuZelle>> HoleSpaltenweise() => Enumerable.Range(0, 9).Select(x => HoleSpalte(x));
 
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> Blockweise aus. Die äußere Aufzählung sind die Blöcke, während die innere die entsprechenden <see cref="SudokuZelle"/> beinhaltet.
         /// </summary>
         /// <returns>Blockweisedarstellung des <see cref="SudokuFeld"/>.</returns>
-        public IEnumerable<IEnumerable<SudokuZelle>> HoleBlockweise() => Enumerable.Range(0, 8).Select(x => HoleBlock(x));
+        public IEnumerable<IEnumerable<SudokuZelle>> HoleBlockweise() => Enumerable.Range(0, 9).Select(x => HoleBlock(x));
 
         /// <summary>
         /// Gibt das gesamte <see cref="SudokuFeld"/> aus. Zunächst erfolgt die Ausgabe der Spalten (<see cref="HoleSpaltenweise"/>), dann die Ausgabe der Zeilen (<see cref="HoleSpaltenweise"/>) 
@@ -132,7 +132,7 @@ namespace Sudoku.Data
         /// Gibt alle <see cref="SudokuZelle"/> des Feldes zurück. 
         /// </summary>
         /// <returns>Alle Zellen des Feldes.</returns>
-        public IEnumerable<SudokuZelle> HolleAlleZellen() => Enumerable.Range(0, 81).Select(x => _zellen[x]);
+        public IEnumerable<SudokuZelle> HoleAlleZellen() => Enumerable.Range(0, 81).Select(x => _zellen[x]);
 
         /// <summary>
         /// Überprüft, ob das Sudokufeld den Regeln entspricht.
@@ -166,7 +166,7 @@ namespace Sudoku.Data
             var rows = HoleZeilenweise().ToList();
             for (int i = 0; i < rows.Count; i++)
             {
-                sb.AppendFormat("{0} {1} {2} | {3} {4} {5} | {6} {7} {8}", rows[i].Select(x => x.ToString()));
+                sb.AppendFormat("{0} {1} {2} | {3} {4} {5} | {6} {7} {8}\n", rows[i].Select(x => x.ToString()).ToArray());
                 if (i == 2 || i == 5)
                     sb.AppendLine("------+-------+------");
             }
