@@ -22,7 +22,8 @@ namespace SudokuCLI
                                     060000280
                                     000419005
                                     000080079";
-            var sudoku = LadeHelper.LadeVonText(sudokuString);
+            // var sudoku = LadeHelper.LadeVonText(sudokuString);
+            var sudoku = LadeHelper.LadeVonDatei(".\\Examples\\Schwer2.txt");
             Console.WriteLine("Input sudoku is:");
             Console.WriteLine(sudoku.ToString());
             Console.WriteLine("\nSolving...");

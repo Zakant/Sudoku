@@ -9,4 +9,13 @@
     <ProjectReference Include="..\Sudoku.Data\Sudoku.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Examples\Schwer2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Schwer1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
