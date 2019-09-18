@@ -42,6 +42,7 @@ namespace Sudoku.Data.Helper
             return wert switch
             {
                 ' ' => SudokuWert.Leer,
+                '0' => SudokuWert.Leer,
                 '1' => SudokuWert.Eins,
                 '2' => SudokuWert.Zwei,
                 '3' => SudokuWert.Drei,
