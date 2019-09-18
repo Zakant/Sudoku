@@ -46,14 +46,14 @@ namespace Sudoku.Data.Solver
         {
             bool hasSet = false;
             // Alle Felder setzen, in denen nur eine Möglichkeit existiert.
-            foreach (var entry in _möglicheWerte.Select((x, i) => (x, i)).Where(x => x.x.Count == 0))
+            foreach (var entry in _möglicheWerte.Select((x, i) => (x, i)).Where(x => x.x.Count == 1))
             {
                 hasSet = true;
                 Feld[entry.i].Wert = entry.x[0];
             }
 
             // Alle Felder setzen, für die es eine Lösung gibt, die sonst nicht  mehr möglich ist.
-            foreach (var cell in Feld.HolleAlleZellen().Where(x => x.Wert == SudokuWert.Leer))
+            foreach (var cell in Feld.HoleAlleZellen().Where(x => x.Wert == SudokuWert.Leer))
             {
                 List<SudokuWert> werte = new List<SudokuWert>();
                 foreach (var wert in _möglicheWerte[cell.Index])
@@ -72,7 +72,7 @@ namespace Sudoku.Data.Solver
                     Feld[cell.Index].Wert = werte[0];
                 }
             }
-            return hasSet;
+            return hasSet && !Feld.IstVollständig();
         }
 
         public IEnumerable<LösungsZweig> FindeZweige()
