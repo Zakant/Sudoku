@@ -2,6 +2,7 @@
 using Sudoku.Data.Solver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,14 @@ namespace SudokuCLI
                                     000419005
                                     000080079";
             var sudoku = LadeHelper.LadeVonText(sudokuString);
+            Console.WriteLine("Input sudoku is:");
             Console.WriteLine(sudoku.ToString());
             Console.WriteLine("\nSolving...");
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             var result = SudokuLöser.Lösen(sudoku);
+            sw.Stop();
+            Console.WriteLine($"Solution computed in {sw.ElapsedMilliseconds}ms");
             Console.WriteLine("Solution:");
             Console.WriteLine(result.Feld);
             Console.ReadLine();
