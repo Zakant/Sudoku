@@ -78,6 +78,8 @@ namespace Sudoku.Data.Solver
         public IEnumerable<LösungsZweig> FindeZweige()
         {
             var chosenEntry = _möglicheWerte.Select((x, i) => (x, i)).Where(x => x.x.Count > 0).OrderBy(x => x.x.Count).FirstOrDefault();
+            if (chosenEntry.x == null)
+                yield break;
             foreach(var path in chosenEntry.x)
             {
                 var field = Feld.Clone();
